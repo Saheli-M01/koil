@@ -81,7 +81,7 @@ export default function ChapterHero() {
           loop
           playsInline
           preload="auto"
-          poster="/logo.webp"
+          poster="/hero-poster.webp"
           aria-hidden="true"
         >
           <source src="/hero.mp4" type="video/mp4" />
