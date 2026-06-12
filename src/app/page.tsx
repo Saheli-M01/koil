@@ -13,6 +13,8 @@ import {
   ChapterSustainability,
 } from "@/components/sections/ChapterMidpoint";
 import ChapterClosing from "@/components/sections/ChapterClosing";
+import GetInTouch from "@/components/ui/GetInTouch";
+import Footer from "@/components/ui/Footer";
 
 export default function Home() {
   useSmoothScroll();
@@ -29,6 +31,8 @@ export default function Home() {
       <ChapterManufacturing />
       <ChapterSustainability />
       <ChapterClosing />
+      <GetInTouch />
+      <Footer />
     </main>
   );
 }

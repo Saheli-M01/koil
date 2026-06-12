@@ -25,9 +25,9 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "KOIL — Fueling a Sustainable Future",
+  title: "KOIL - Fueling a Sustainable Future",
   description:
-    "Kanchan Oil Industries transforms waste streams into sustainable fuel for road, marine, and aviation. Energy is not consumed — it is transformed.",
+    "Kanchan Oil Industries transforms waste streams into sustainable fuel for road, marine, and aviation. Energy is not consumed c- it is transformed.",
   icons: {
     icon: "/logo.webp",
     shortcut: "/logo.webp",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     "Kanchan Oil Industries",
   ],
   openGraph: {
-    title: "KOIL — Fueling a Sustainable Future",
+    title: "KOIL c- Fueling a Sustainable Future",
     description:
       "Waste becomes fuel. Fuel powers industries. The future of energy is circular.",
     type: "website",

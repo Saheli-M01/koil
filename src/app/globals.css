@@ -78,7 +78,7 @@ body {
 .display-xl {
   font-family: var(--font-display);
   font-weight: 500;
-  line-height: 0.92;
+  line-height: 0.98;
   letter-spacing: -0.04em;
 }
 
@@ -114,4 +114,10 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent-strong);
+}
+
+/* Section background utility using --color-surface */
+.section-bg,
+section {
+  background: var(--color-surface);
 }

@@ -1,6 +1,6 @@
 // Single source of truth for all narrative copy.
 // Keeping content here means the design stays consistent and copy never
-// hardcodes system language — every line is written from the reader's side.
+// hardcodes system language - every line is written from the reader's side.
 
 export const BRAND = {
   name: "Kanchan Oil Industries",
@@ -25,7 +25,7 @@ export const SOLUTIONS = [
     index: "02",
     name: "SAF Feedstock",
     lede: "The groundwork for cleaner skies.",
-    body: "Refined feedstock engineered to sustainable aviation fuel standards — the upstream foundation that lets aircraft fly on yesterday's waste.",
+    body: "Refined feedstock engineered to sustainable aviation fuel standards - the upstream foundation that lets aircraft fly on yesterday's waste.",
     metric: "1.4M+",
     metricLabel: "liters of feedstock capacity",
     tint: "var(--color-accent)",
@@ -35,7 +35,7 @@ export const SOLUTIONS = [
     index: "03",
     name: "Trans-Esterification Residue",
     lede: "Nothing leaves the cycle.",
-    body: "Even the byproduct becomes product. Our residue streams are recovered into glycerin and industrial inputs — closing the loop where most refining ends.",
+    body: "Even the byproduct becomes product. Our residue streams are recovered into glycerin and industrial inputs - closing the loop where most refining ends.",
     metric: "Zero",
     metricLabel: "waste sent downstream",
     tint: "var(--color-accent-soft)",
@@ -59,7 +59,7 @@ export const INDUSTRIES = [
     id: "aviation",
     name: "Aviation",
     line: "The hardest sector to decarbonize. The one we're building for.",
-    desc: "SAF-ready feedstock that puts circular fuel on the runway — supplying the supply chain of flight itself.",
+    desc: "SAF-ready feedstock that puts circular fuel on the runway - supplying the supply chain of flight itself.",
   },
 ] as const;
 

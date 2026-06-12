@@ -10,15 +10,16 @@ export default function ChapterHero() {
   const line2 = useRef<HTMLDivElement>(null);
   const intro = useRef<HTMLDivElement>(null);
   const sceneWrap = useRef<HTMLDivElement>(null);
+  const overlay = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useLayoutEffect(() => {
     const el = section.current;
     if (!el) return;
+
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // Drive the droplet morph + statement reveal across a pinned scroll.
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: el,
@@ -29,7 +30,13 @@ export default function ChapterHero() {
         },
       });
 
-      tl.to(intro.current, { opacity: 0, y: -40, duration: 0.5 }, 0)
+      tl.fromTo(
+        intro.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5 },
+        0.25,
+      )
+        .to(overlay.current, { opacity: 1, duration: 0.6 }, 0.2)
         .fromTo(
           line1.current,
           { opacity: 0, y: 60 },
@@ -43,7 +50,7 @@ export default function ChapterHero() {
           0.6,
         )
         .to(sceneWrap.current, { scale: 1.05, duration: 1 }, 0.3);
-    }, el);
+    }, el); // <- THIS WAS MISSING
 
     return () => ctx.revert();
   }, []);
@@ -88,10 +95,19 @@ export default function ChapterHero() {
         </video>
       </div>
 
+      {/* darkening overlay — fades in as the statement appears */}
+      <div
+        ref={overlay}
+        className="pointer-events-none absolute inset-0 opacity-0 bg-gradient-to-b from-black/70 via-black/55 to-black/75"
+      />
+
+      {/* permanent vignette for edge contrast */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(0,0,0,0.65)_100%)]" />
+
       {/* intro eyebrow */}
       <div
         ref={intro}
-        className="absolute left-1/2 top-[18%] -translate-x-1/2 text-center"
+        className="absolute left-1/2 top-[18%] -translate-x-1/2 text-center opacity-0"
       >
         <p className="eyebrow mb-4">Chapter 01 — Energy Never Disappears</p>
         <p className="font-mono text-xs tracking-[0.3em] text-muted-vapor">
@@ -103,15 +119,16 @@ export default function ChapterHero() {
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
         <div
           ref={line1}
-          className="display-xl text-[clamp(2.8rem,9vw,8rem)] text-creame opacity-0"
+          className="display-xl text-[clamp(2.8rem,9vw,8rem)] text-creame opacity-0 drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
         >
-          Energy is not consumed.
+          <h1>Energy is not consumed.</h1>
         </div>
+
         <div
           ref={line2}
-          className="display-xl bg-gradient-to-r from-creame via-ignite to-regen bg-clip-text text-[clamp(2.8rem,9vw,8rem)] italic text-transparent opacity-0"
+          className="mt-12 display-xl bg-gradient-to-r from-creame via-ignite to-regen bg-clip-text text-[clamp(2.8rem,9vw,8rem)] italic text-transparent opacity-0 drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
         >
-          It is transformed.
+          <h1> It is transformed.</h1>
         </div>
       </div>
 

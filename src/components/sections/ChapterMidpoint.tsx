@@ -24,7 +24,7 @@ export function ChapterManufacturing() {
             duration: 1,
             ease: "power3.out",
             scrollTrigger: { trigger: row, start: "top 80%" },
-          }
+          },
         );
       });
     }, el);
@@ -38,10 +38,10 @@ export function ChapterManufacturing() {
       className="relative bg-void py-32 md:py-48"
     >
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <p className="eyebrow mb-6">Chapter 06 — Manufacturing Excellence</p>
+        <p className="eyebrow mb-6">Chapter 06 - Manufacturing Excellence</p>
         <RevealText
           as="h2"
-          className="display-xl mb-20 max-w-3xl text-[clamp(2.2rem,6vw,5rem)] text-vapor"
+          className="display-xl mb-20 max-w-5xl text-[clamp(2.2rem,6vw,5rem)] text-vapor"
         >
           A modern industrial innovator, engineered to export-grade precision.
         </RevealText>
@@ -86,7 +86,7 @@ export function ChapterSustainability() {
             delay: i * 0.08,
             ease: "power3.out",
             scrollTrigger: { trigger: section.current, start: "top 65%" },
-          }
+          },
         );
       });
     }, el);
@@ -101,18 +101,14 @@ export function ChapterSustainability() {
     >
       <div className="pointer-events-none absolute left-1/2 top-0 h-[50vh] w-[50vh] -translate-x-1/2 rounded-full bg-regen/10 blur-[140px]" />
       <div className="relative mx-auto max-w-[1400px] px-6 md:px-10">
-        <p className="eyebrow mb-6">Chapter 07 — Sustainability Commitment</p>
+        <p className="eyebrow mb-6">Chapter 07 - Sustainability Commitment</p>
         <h2 className="display-xl mb-20 max-w-3xl text-[clamp(2.2rem,6vw,5rem)] text-vapor">
           Impact you can measure, not just claim.
         </h2>
 
         <div className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.04] lg:grid-cols-4">
           {SUSTAINABILITY.map((s) => (
-            <div
-              key={s.label}
-              data-stat
-              className="bg-void p-8 md:p-10"
-            >
+            <div key={s.label} data-stat className="bg-void p-8 md:p-10">
               <div className="font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-none text-regen">
                 {s.value}
               </div>

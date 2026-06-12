@@ -52,7 +52,7 @@ export default function ChapterIndustries() {
               containerAnimation: gsap.getById("ind") as never,
               start: "left center",
             },
-          }
+          },
         );
       });
     }, el);
@@ -69,12 +69,12 @@ export default function ChapterIndustries() {
       <div ref={track} className="flex h-screen w-max">
         {/* intro panel */}
         <div className="flex h-screen w-screen flex-col justify-center px-6 md:px-20">
-          <p className="eyebrow mb-6">Chapter 04 — Powering Industries</p>
+          <p className="eyebrow mb-6">Chapter 04 - Powering Industries</p>
           <h2 className="display-xl max-w-3xl text-[clamp(2.4rem,7vw,6rem)] text-vapor">
             One fuel. Three frontiers of motion.
           </h2>
           <p className="mt-8 max-w-md text-muted-vapor">
-            Scroll sideways through the sectors KOIL keeps moving — each its own
+            Scroll through the sectors KOIL keeps moving - each its own
             environment, each decarbonizing on its own terms.
           </p>
         </div>

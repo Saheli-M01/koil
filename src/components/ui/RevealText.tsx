@@ -42,7 +42,7 @@ export default function RevealText({
             trigger: el,
             start: "top 82%",
           },
-        }
+        },
       );
     }, el);
 
@@ -52,12 +52,8 @@ export default function RevealText({
   return (
     <Tag ref={ref as never} className={cn(className)} aria-label={children}>
       {children.split(" ").map((word, i) => (
-        <span
-          key={i}
-          aria-hidden
-          className="inline-block overflow-hidden align-bottom"
-        >
-          <span data-word className="inline-block">
+        <span key={i} aria-hidden className="overflow-hidden">
+          <span data-word className="inline-block leading-[1.2]">
             {word}&nbsp;
           </span>
         </span>

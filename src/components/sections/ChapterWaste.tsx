@@ -37,7 +37,7 @@ export default function ChapterWaste() {
               end: "bottom 55%",
               scrub: 1,
             },
-          }
+          },
         );
       });
     }, el);
@@ -52,10 +52,10 @@ export default function ChapterWaste() {
       className="relative bg-void py-32 md:py-48"
     >
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-        <p className="eyebrow mb-8">Chapter 02 — From Waste to Fuel</p>
+        <p className="eyebrow mb-8">Chapter 02 - From Waste to Fuel</p>
         <RevealText
           as="h2"
-          className="display-xl mb-20 max-w-4xl text-[clamp(2.2rem,6vw,5rem)] text-vapor"
+          className="display-xl mb-20 max-w-4xl text-[clamp(2.2rem,6vw,5rem)] text-vapor leading-[6]"
         >
           Most companies see waste. We see energy waiting to change form.
         </RevealText>
@@ -89,7 +89,7 @@ export default function ChapterWaste() {
         </div>
 
         <p className="mt-20 max-w-xl text-lg leading-relaxed text-muted-vapor">
-          The circular economy isn&apos;t a slogan here — it&apos;s a process.
+          The circular economy isn&apos;t a slogan here - it&apos;s a process.
           What enters as discard leaves as fuel, and nothing is burned away that
           can be regenerated instead.
         </p>
