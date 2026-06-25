@@ -76,6 +76,8 @@ export function ChapterSustainability() {
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>("[data-stat]").forEach((stat, i) => {
+        const valueEl = stat.querySelector("[data-stat-value]") as HTMLElement;
+        
         gsap.fromTo(
           stat,
           { opacity: 0, y: 60 },
@@ -88,6 +90,71 @@ export function ChapterSustainability() {
             scrollTrigger: { trigger: section.current, start: "top 65%" },
           },
         );
+
+        // Animate counter values
+        if (valueEl) {
+          const originalValue = valueEl.textContent?.trim() || "";
+          
+          // For −84%
+          if (originalValue === "−84%") {
+            const counterObj = { val: 0 };
+            ScrollTrigger.create({
+              trigger: section.current,
+              start: "top 65%",
+              onEnter: () => {
+                gsap.to(counterObj, {
+                  val: 84,
+                  duration: 2,
+                  delay: i * 0.08,
+                  ease: "power2.out",
+                  onUpdate: () => {
+                    valueEl.textContent = `−${Math.round(counterObj.val)}%`;
+                  },
+                });
+              },
+            });
+          }
+          
+          // For 100%
+          if (originalValue === "100%") {
+            const counterObj = { val: 0 };
+            ScrollTrigger.create({
+              trigger: section.current,
+              start: "top 65%",
+              onEnter: () => {
+                gsap.to(counterObj, {
+                  val: 100,
+                  duration: 2,
+                  delay: i * 0.08,
+                  ease: "power2.out",
+                  onUpdate: () => {
+                    valueEl.textContent = `${Math.round(counterObj.val)}%`;
+                  },
+                });
+              },
+            });
+          }
+          
+          // For 0 (counting down from 100)
+          if (originalValue === "0") {
+            const counterObj = { val: 100 };
+            ScrollTrigger.create({
+              trigger: section.current,
+              start: "top 65%",
+              onEnter: () => {
+                gsap.to(counterObj, {
+                  val: 0,
+                  duration: 2,
+                  delay: i * 0.08,
+                  ease: "power2.out",
+                  onUpdate: () => {
+                    valueEl.textContent = `${Math.round(counterObj.val)}`;
+                  },
+                });
+              },
+            });
+          }
+        }
       });
     }, el);
     return () => ctx.revert();
@@ -109,7 +176,10 @@ export function ChapterSustainability() {
         <div className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-white/[0.06] bg-white/[0.04] lg:grid-cols-4">
           {SUSTAINABILITY.map((s) => (
             <div key={s.label} data-stat className="bg-void p-8 md:p-10">
-              <div className="font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-none text-regen">
+              <div 
+                data-stat-value
+                className="font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-none text-regen"
+              >
                 {s.value}
               </div>
               <p className="mt-4 text-sm leading-relaxed text-muted-vapor">

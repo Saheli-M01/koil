@@ -64,26 +64,24 @@ export default function ChapterCycle() {
             const nodeProgress = i / CYCLE_STAGES.length;
             const active = progress >= nodeProgress - 0.01;
             node.classList.toggle("is-active", active);
+            
+            // Animate node appearance as ring passes
+            if (active && node.style.opacity === "0") {
+              gsap.to(node, {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                duration: 0.5,
+                ease: "back.out(1.7)",
+              });
+            }
           });
         },
       });
 
-      gsap.utils.toArray<HTMLElement>("[data-node]").forEach((node, i) => {
+      // Set initial state for all nodes
+      gsap.utils.toArray<HTMLElement>("[data-node]").forEach((node) => {
         gsap.set(node, { opacity: 0, scale: 0.6, y: 12 });
-        ScrollTrigger.create({
-          trigger: el,
-          start: "center center",
-          onEnter: () => {
-            gsap.to(node, {
-              opacity: 1,
-              scale: 1,
-              y: 0,
-              duration: 0.5,
-              delay: i * 0.06,
-              ease: "back.out(1.7)",
-            });
-          },
-        });
       });
 
       return () => st.kill();
@@ -114,126 +112,132 @@ export default function ChapterCycle() {
 
         <div className="mx-auto flex h-full max-w-[1400px] flex-col justify-center px-6 md:px-10">
           <p className="eyebrow mb-6">Chapter 05 - Circular Energy Systems</p>
-          <h2 className="display-xl mb-6 max-w-3xl text-[clamp(2.2rem,6vw,5rem)] text-vapor">
-            A loop with no end and no waste.
-          </h2>
 
-          <div className="relative mx-auto aspect-square w-full max-w-[500px]">
-            <svg viewBox="0 0 600 600" className="h-full w-full">
-              <defs>
-                <linearGradient id="cycleGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="var(--color-accent-soft)" />
-                  <stop offset="50%" stopColor="var(--creame)" />
-                  <stop offset="100%" stopColor="var(--color-accent-strong)" />
-                </linearGradient>
-                <filter
-                  id="ringGlow"
-                  x="-50%"
-                  y="-50%"
-                  width="200%"
-                  height="200%"
+          <div className="flex items-center">
+            <h2 className="display-xl mb-6 max-w-3xl text-[clamp(2.2rem,6vw,5rem)] text-vapor ">
+              A loop with no end and no waste.
+            </h2>
+
+            <div className="relative mx-auto aspect-square w-full max-w-[500px] ">
+              <svg viewBox="0 0 600 600" className="h-full w-full">
+                <defs>
+                  <linearGradient id="cycleGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="var(--color-accent-soft)" />
+                    <stop offset="50%" stopColor="var(--creame)" />
+                    <stop
+                      offset="100%"
+                      stopColor="var(--color-accent-strong)"
+                    />
+                  </linearGradient>
+                  <filter
+                    id="ringGlow"
+                    x="-50%"
+                    y="-50%"
+                    width="200%"
+                    height="200%"
+                  >
+                    <feGaussianBlur stdDeviation="6" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                {/* track */}
+                <circle
+                  cx={cx}
+                  cy={cy}
+                  r={R}
+                  fill="none"
+                  stroke="var(--color-panel)"
+                  strokeWidth="1.5"
+                />
+
+                {/* soft glow trace beneath progress ring */}
+                <circle
+                  ref={glow}
+                  cx={cx}
+                  cy={cy}
+                  r={R}
+                  fill="none"
+                  stroke="var(--creame)"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  opacity="0.18"
+                  filter="url(#ringGlow)"
+                  transform={`rotate(-90 ${cx} ${cy})`}
+                />
+
+                {/* progress ring */}
+                <circle
+                  ref={ring}
+                  cx={cx}
+                  cy={cy}
+                  r={R}
+                  fill="none"
+                  stroke="url(#cycleGrad)"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  transform={`rotate(-90 ${cx} ${cy})`}
+                />
+
+                {/* leading head dot */}
+                <circle
+                  ref={head}
+                  r="6"
+                  fill="var(--creame)"
+                  style={{
+                    opacity: 0,
+                    filter: "drop-shadow(0 0 10px var(--creame))",
+                    transition: "opacity 0.2s linear",
+                  }}
+                />
+              </svg>
+
+              {/* center label */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="font-mono text-xs uppercase tracking-[0.3em] text-muted-vapor">
+                  The Cycle
+                </span>
+                <span className="font-display text-2xl text-vapor md:text-3xl">
+                  Nothing lost
+                </span>
+                <span
+                  ref={counter}
+                  className="mt-2 font-mono text-[0.65rem] tracking-[0.25em] text-color-accent-soft"
                 >
-                  <feGaussianBlur stdDeviation="6" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
+                  0%
+                </span>
+              </div>
 
-              {/* track */}
-              <circle
-                cx={cx}
-                cy={cy}
-                r={R}
-                fill="none"
-                stroke="var(--color-panel)"
-                strokeWidth="1.5"
-              />
-
-              {/* soft glow trace beneath progress ring */}
-              <circle
-                ref={glow}
-                cx={cx}
-                cy={cy}
-                r={R}
-                fill="none"
-                stroke="var(--creame)"
-                strokeWidth="6"
-                strokeLinecap="round"
-                opacity="0.18"
-                filter="url(#ringGlow)"
-                transform={`rotate(-90 ${cx} ${cy})`}
-              />
-
-              {/* progress ring */}
-              <circle
-                ref={ring}
-                cx={cx}
-                cy={cy}
-                r={R}
-                fill="none"
-                stroke="url(#cycleGrad)"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                transform={`rotate(-90 ${cx} ${cy})`}
-              />
-
-              {/* leading head dot */}
-              <circle
-                ref={head}
-                r="6"
-                fill="var(--creame)"
-                style={{
-                  opacity: 0,
-                  filter: "drop-shadow(0 0 10px var(--creame))",
-                  transition: "opacity 0.2s linear",
-                }}
-              />
-            </svg>
-
-            {/* center label */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-              <span className="font-mono text-xs uppercase tracking-[0.3em] text-muted-vapor">
-                The Cycle
-              </span>
-              <span className="font-display text-2xl text-vapor md:text-3xl">
-                Nothing lost
-              </span>
-              <span
-                ref={counter}
-                className="mt-2 font-mono text-[0.65rem] tracking-[0.25em] text-color-accent-soft"
-              >
-                0%
-              </span>
+              {/* nodes positioned around the ring */}
+              {CYCLE_STAGES.map((stage, i) => {
+                const angle =
+                  (i / CYCLE_STAGES.length) * Math.PI * 2 - Math.PI / 2;
+                const x = 50 + (R / 6) * Math.cos(angle);
+                const y = 50 + (R / 6) * Math.sin(angle);
+                return (
+                  <div
+                    key={stage.label}
+                    data-node
+                    className="absolute flex w-32 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center transition-[filter] duration-500"
+                    style={{ left: `${x}%`, top: `${y}%` }}
+                  >
+                    <span
+                      className="node-dot mb-1 h-3 w-3 rounded-full bg-ignite transition-all duration-500"
+                      style={{ boxShadow: "0 0 20px var(--creame)" }}
+                    />
+                    <span className="font-display text-base text-vapor md:text-lg">
+                      {stage.label}
+                    </span>
+                    <span className="font-mono text-[0.6rem] leading-tight text-muted-vapor">
+                      {stage.note}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
-
-            {/* nodes positioned around the ring */}
-            {CYCLE_STAGES.map((stage, i) => {
-              const angle =
-                (i / CYCLE_STAGES.length) * Math.PI * 2 - Math.PI / 2;
-              const x = 50 + (R / 6) * Math.cos(angle);
-              const y = 50 + (R / 6) * Math.sin(angle);
-              return (
-                <div
-                  key={stage.label}
-                  data-node
-                  className="absolute flex w-32 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center transition-[filter] duration-500"
-                  style={{ left: `${x}%`, top: `${y}%` }}
-                >
-                  <span
-                    className="node-dot mb-1 h-3 w-3 rounded-full bg-ignite transition-all duration-500"
-                    style={{ boxShadow: "0 0 20px var(--creame)" }}
-                  />
-                  <span className="font-display text-base text-vapor md:text-lg">
-                    {stage.label}
-                  </span>
-                  <span className="font-mono text-[0.6rem] leading-tight text-muted-vapor">
-                    {stage.note}
-                  </span>
-                </div>
-              );
-            })}
           </div>
         </div>
       </div>

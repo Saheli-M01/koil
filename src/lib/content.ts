@@ -42,6 +42,36 @@ export const SOLUTIONS = [
   },
 ] as const;
 
+export const PRODUCTS = [
+  {
+    id: "biodiesel",
+    index: "01",
+    name: "Bio Diesel",
+    tagline: "Multi-Feedstock Waste Derived Bio Fuel",
+    description: "Multi-Feedstock Waste Derived Bio Fuel conforming to EN 14214 & ISCC",
+    details: "A renewable diesel synthesized from used cooking oil and waste fats. It runs in engines built today, with a fraction of the lifecycle carbon.",
+    image: "/product_1.png",
+  },
+  {
+    id: "saf",
+    index: "02",
+    name: "Pre-Treated SAF Feedstock",
+    tagline: "Sustainable Aviation Fuel Ready",
+    description: "Waste/Residue based feedstock suitable for SAF / HVO (Class II, IV, Advanced) production",
+    details: "Refined feedstock engineered to sustainable aviation fuel standards - the upstream foundation that lets aircraft fly on yesterday's waste.",
+    image: "/product_2.png",
+  },
+  {
+    id: "ter",
+    index: "03",
+    name: "Trans-Esterification Residue (TER)",
+    tagline: "Complete Circle, Zero Waste",
+    description: "Residue from the Trans Esterification process which can be further used as a fuel",
+    details: "Even the byproduct becomes product. Our residue streams are recovered into glycerin and industrial inputs - closing the loop where most refining ends.",
+    image: "/product_3.png",
+  },
+] as const;
+
 export const INDUSTRIES = [
   {
     id: "road",

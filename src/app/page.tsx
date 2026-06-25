@@ -6,7 +6,7 @@ import ScrollProgress from "@/components/ui/ScrollProgress";
 import ChapterHero from "@/components/sections/ChapterHero";
 import ChapterWaste from "@/components/sections/ChapterWaste";
 import ChapterSolutions from "@/components/sections/ChapterSolutions";
-import ChapterIndustries from "@/components/sections/ChapterIndustries";
+import ChapterProducts from "@/components/sections/ChapterProducts";
 import ChapterCycle from "@/components/sections/ChapterCycle";
 import {
   ChapterManufacturing,
@@ -26,7 +26,7 @@ export default function Home() {
       <ChapterHero />
       <ChapterWaste />
       <ChapterSolutions />
-      <ChapterIndustries />
+      <ChapterProducts />
       <ChapterCycle />
       <ChapterManufacturing />
       <ChapterSustainability />

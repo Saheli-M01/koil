@@ -26,7 +26,7 @@ export default function Footer() {
             className="max-w-sm text-sm leading-relaxed"
             style={{ color: "var(--creame)", opacity: 0.85 }}
           >
-            {BRAND.name} — {BRAND.thesis}
+            {BRAND.name} - {BRAND.thesis}
           </p>
         </div>
 
@@ -42,10 +42,10 @@ export default function Footer() {
               Solutions
             </a>
             <a
-              href="#industries"
+              href="#products"
               className="transition-opacity hover:opacity-60"
             >
-              Industries
+              Products
             </a>
             <a
               href="#sustainability"

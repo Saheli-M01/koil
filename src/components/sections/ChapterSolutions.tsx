@@ -15,7 +15,7 @@ export default function ChapterSolutions() {
 
     const ctx = gsap.context(() => {
       const panels = gsap.utils.toArray<HTMLElement>("[data-panel]");
-      panels.forEach((panel) => {
+      panels.forEach((panel, index) => {
         const num = panel.querySelector("[data-num]");
         const content = panel.querySelector("[data-content]");
         const metric = panel.querySelector("[data-metric]");
@@ -52,6 +52,54 @@ export default function ChapterSolutions() {
             scrollTrigger: { trigger: panel, start: "top 55%" },
           },
         );
+
+        // Animate the number count for biodiesel section (84%)
+        if (index === 0 && metric) {
+          const counterObj = { val: 0 };
+          gsap.to(counterObj, {
+            val: 84,
+            duration: 2,
+            ease: "power2.out",
+            scrollTrigger: { 
+              trigger: panel, 
+              start: "top 55%",
+              onEnter: () => {
+                gsap.to(counterObj, {
+                  val: 84,
+                  duration: 2,
+                  ease: "power2.out",
+                  onUpdate: () => {
+                    metric.textContent = `−${Math.round(counterObj.val)}%`;
+                  },
+                });
+              },
+            },
+          });
+        }
+
+        // Animate the number count for SAF section (1.4M+)
+        if (index === 1 && metric) {
+          const counterObj = { val: 0 };
+          gsap.to(counterObj, {
+            val: 1.4,
+            duration: 2,
+            ease: "power2.out",
+            scrollTrigger: { 
+              trigger: panel, 
+              start: "top 55%",
+              onEnter: () => {
+                gsap.to(counterObj, {
+                  val: 1.4,
+                  duration: 2,
+                  ease: "power2.out",
+                  onUpdate: () => {
+                    metric.textContent = `${counterObj.val.toFixed(1)}M+`;
+                  },
+                });
+              },
+            },
+          });
+        }
       });
     }, el);
 
